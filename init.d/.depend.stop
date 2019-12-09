@@ -1,0 +1,10 @@
+TARGETS = unattended-upgrades postgresql resolvconf urandom sendsigs rsyslog umountnfs.sh hwclock.sh networking umountfs umountroot halt reboot
+sendsigs: postgresql unattended-upgrades
+rsyslog: postgresql sendsigs
+umountnfs.sh: postgresql rsyslog sendsigs unattended-upgrades
+hwclock.sh: postgresql rsyslog
+networking: postgresql umountnfs.sh
+umountfs: postgresql urandom resolvconf hwclock.sh umountnfs.sh unattended-upgrades networking
+umountroot: umountfs
+halt: umountroot
+reboot: umountroot

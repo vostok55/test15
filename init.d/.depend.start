@@ -1,0 +1,12 @@
+TARGETS = rsyslog unattended-upgrades killprocs postgresql single dbus ssh sysstat cron rsync rc.local grub-common ondemand
+INTERACTIVE =
+postgresql: rsyslog
+single: killprocs
+dbus: rsyslog
+ssh: rsyslog
+sysstat: rsyslog
+cron: rsyslog
+rsync: rsyslog
+rc.local: postgresql rsyslog unattended-upgrades dbus ssh sysstat cron rsync
+grub-common: postgresql rsyslog unattended-upgrades dbus ssh sysstat cron rsync
+ondemand: postgresql rsyslog unattended-upgrades dbus ssh sysstat cron rsync
